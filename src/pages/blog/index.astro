@@ -1,0 +1,42 @@
+---
+import Base from '../../layouts/Base.astro';
+import PostCard from '../../components/PostCard.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog'))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<Base title="Blog — Fengze Jiang" description="Writing on ML, engineering, and things I find interesting.">
+  <h1>Blog</h1>
+  <p class="subtitle">Writing on ML, engineering, and things I find interesting.</p>
+
+  <div class="post-list">
+    {posts.map(post => (
+      <PostCard
+        title={post.data.title}
+        description={post.data.description}
+        date={post.data.date}
+        slug={post.slug}
+        tags={post.data.tags}
+      />
+    ))}
+  </div>
+</Base>
+
+<style>
+  h1 {
+    margin-bottom: 0.4rem;
+  }
+
+  .subtitle {
+    color: var(--color-text-muted);
+    margin-bottom: 2rem;
+  }
+
+  .post-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+</style>

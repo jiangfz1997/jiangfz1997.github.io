@@ -1,0 +1,86 @@
+---
+const links = [
+  { href: '/',          label: 'Home' },
+  { href: '/about',     label: 'About' },
+  { href: '/projects',  label: 'Projects' },
+  { href: '/resume',    label: 'Resume' },
+  { href: '/blog',      label: 'Blog' },
+];
+
+const pathname = Astro.url.pathname;
+---
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">FJ</a>
+    <ul class="nav-links">
+      {links.map(({ href, label }) => (
+        <li>
+          <a
+            href={href}
+            class:list={['nav-link', { active: pathname === href || (href !== '/' && pathname.startsWith(href)) }]}
+          >
+            {label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</nav>
+
+<style>
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(17, 19, 24, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--color-border);
+    height: var(--nav-height);
+  }
+
+  .nav-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--color-text);
+    letter-spacing: -0.02em;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 0.25rem;
+  }
+
+  .nav-link {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.4rem 0.75rem;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: color 0.15s, background 0.15s;
+  }
+
+  .nav-link:hover {
+    color: var(--color-text);
+    background: var(--color-bg-hover);
+    text-decoration: none;
+  }
+
+  .nav-link.active {
+    color: var(--color-accent);
+    background: rgba(109, 133, 245, 0.1);
+  }
+</style>

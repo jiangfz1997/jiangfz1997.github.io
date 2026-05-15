@@ -1,0 +1,171 @@
+---
+import Base from '../layouts/Base.astro';
+import PostCard from '../components/PostCard.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog'))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+
+const featuredProjects = (await getCollection('projects'))
+  .filter(p => p.data.featured)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<Base title="Fengze Jiang">
+  <section class="hero">
+    <h1>Fengze Jiang</h1>
+    <p class="hero-tagline">ML Engineer · Builder · Writer</p>
+    <p class="hero-bio">
+      I build LLM-powered systems and the evaluation infrastructure around them.
+      Currently focused on retrieval, evals, and making language models useful in production.
+    </p>
+    <div class="hero-links">
+      <a href="/about" class="btn">About me</a>
+      <a href="/resume" class="btn btn-outline">Resume</a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <h2 class="section-title">Featured Projects</h2>
+      <a href="/projects" class="section-more">All projects →</a>
+    </div>
+    <div class="project-grid">
+      {featuredProjects.map(p => (
+        <ProjectCard
+          title={p.data.title}
+          description={p.data.description}
+          tags={p.data.tags}
+          slug={p.slug}
+          github={p.data.github}
+          demo={p.data.demo}
+          status={p.data.status}
+        />
+      ))}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <h2 class="section-title">Recent Posts</h2>
+      <a href="/blog" class="section-more">All posts →</a>
+    </div>
+    <div class="post-list">
+      {posts.map(post => (
+        <PostCard
+          title={post.data.title}
+          description={post.data.description}
+          date={post.data.date}
+          slug={post.slug}
+          tags={post.data.tags}
+        />
+      ))}
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    padding: 4rem 0 3rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .hero-tagline {
+    color: var(--color-accent);
+    font-weight: 500;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    letter-spacing: 0.02em;
+  }
+
+  .hero-bio {
+    color: var(--color-text-muted);
+    font-size: 1.05rem;
+    max-width: 520px;
+    margin-bottom: 1.75rem;
+  }
+
+  .hero-links {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 0.55rem 1.25rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    background: var(--color-accent);
+    color: #fff;
+    transition: background 0.15s, transform 0.1s;
+  }
+
+  .btn:hover {
+    background: var(--color-accent-hover);
+    text-decoration: none;
+    transform: translateY(-1px);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--color-accent);
+    border: 1.5px solid var(--color-accent);
+  }
+
+  .btn-outline:hover {
+    background: rgba(109, 133, 245, 0.1);
+  }
+
+  .section {
+    padding: 2rem 0;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
+  }
+
+  .section-title {
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-text-muted);
+    margin-bottom: 0;
+  }
+
+  .section-more {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-accent);
+  }
+
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1rem;
+  }
+
+  .post-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  @media (max-width: 600px) {
+    .project-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

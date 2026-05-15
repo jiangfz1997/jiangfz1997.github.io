@@ -1,0 +1,236 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Resume — Fengze Jiang" description="Resume of Fengze Jiang, ML Engineer.">
+  <div class="resume">
+    <header class="resume-header">
+      <h1>Fengze Jiang</h1>
+      <div class="resume-contacts">
+        <a href="mailto:jiangfz1997@gmail.com">jiangfz1997@gmail.com</a>
+        <span>·</span>
+        <a href="https://github.com/jiangfz1997" target="_blank" rel="noopener">github.com/jiangfz1997</a>
+        <span>·</span>
+        <a href="https://linkedin.com/in/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </header>
+
+    <section class="resume-section">
+      <h2>Summary</h2>
+      <p>
+        ML engineer with experience building LLM-powered systems and data pipelines.
+        Passionate about applying modern AI techniques to solve practical problems.
+        <!-- Replace with your own summary -->
+      </p>
+    </section>
+
+    <section class="resume-section">
+      <h2>Experience</h2>
+
+      <div class="entry">
+        <div class="entry-header">
+          <div>
+            <span class="entry-title">ML Engineer</span>
+            <span class="entry-org">· Company Name</span>
+          </div>
+          <span class="entry-date">2023 – Present</span>
+        </div>
+        <ul>
+          <li>Built and deployed LLM-based feature pipelines reducing latency by 40%.</li>
+          <li>Designed evaluation harnesses for RAG systems with automated regression tracking.</li>
+          <li>Led migration of legacy NLP models to transformer-based architecture.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-header">
+          <div>
+            <span class="entry-title">Software Engineer Intern</span>
+            <span class="entry-org">· Another Company</span>
+          </div>
+          <span class="entry-date">Summer 2022</span>
+        </div>
+        <ul>
+          <li>Implemented data preprocessing pipelines handling 10M+ records daily.</li>
+          <li>Contributed to internal tooling for model monitoring and alerting.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="resume-section">
+      <h2>Education</h2>
+      <div class="entry">
+        <div class="entry-header">
+          <div>
+            <span class="entry-title">M.S. Computer Science</span>
+            <span class="entry-org">· University Name</span>
+          </div>
+          <span class="entry-date">2021 – 2023</span>
+        </div>
+        <p>Focus: Machine Learning · GPA: X.X / 4.0</p>
+      </div>
+      <div class="entry">
+        <div class="entry-header">
+          <div>
+            <span class="entry-title">B.Eng. Software Engineering</span>
+            <span class="entry-org">· University Name</span>
+          </div>
+          <span class="entry-date">2016 – 2020</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="resume-section">
+      <h2>Skills</h2>
+      <div class="skills-grid">
+        <div class="skill-group">
+          <h3>Languages</h3>
+          <p>Python, TypeScript, Go, SQL</p>
+        </div>
+        <div class="skill-group">
+          <h3>ML / AI</h3>
+          <p>PyTorch, HuggingFace, LangChain, OpenAI API, RAG, fine-tuning</p>
+        </div>
+        <div class="skill-group">
+          <h3>Infrastructure</h3>
+          <p>Docker, Kubernetes, AWS, GitHub Actions, PostgreSQL</p>
+        </div>
+        <div class="skill-group">
+          <h3>Tools</h3>
+          <p>Git, Linux, Weights & Biases, dbt, Spark</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="resume-section">
+      <h2>Projects</h2>
+      <div class="entry">
+        <div class="entry-header">
+          <span class="entry-title">Personal Site</span>
+          <a href="https://github.com/jiangfz1997/jiangfz1997.github.io" target="_blank" rel="noopener" class="entry-link">↗ GitHub</a>
+        </div>
+        <p>Astro-based personal site with blog and demo hosting. Deployed via GitHub Actions.</p>
+      </div>
+      <!-- Add more projects here -->
+    </section>
+  </div>
+</Base>
+
+<style>
+  .resume {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 2rem 0;
+  }
+
+  .resume-header {
+    margin-bottom: 2.5rem;
+  }
+
+  .resume-header h1 {
+    margin-bottom: 0.4rem;
+  }
+
+  .resume-contacts {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+  }
+
+  .resume-contacts a {
+    color: var(--color-text-muted);
+  }
+
+  .resume-contacts a:hover {
+    color: var(--color-accent-hover);
+  }
+
+  .resume-section {
+    margin-bottom: 2.5rem;
+  }
+
+  .resume-section > h2 {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-muted);
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 0.4rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .entry {
+    margin-bottom: 1.5rem;
+  }
+
+  .entry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .entry-title {
+    font-weight: 600;
+  }
+
+  .entry-org {
+    color: var(--color-text-muted);
+  }
+
+  .entry-date {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    white-space: nowrap;
+  }
+
+  .entry-link {
+    font-size: 0.85rem;
+  }
+
+  .entry ul {
+    padding-left: 1.25rem;
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+  }
+
+  .entry ul li {
+    margin-bottom: 0.3rem;
+  }
+
+  .entry p {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 0;
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem 2rem;
+  }
+
+  .skill-group h3 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+
+  .skill-group p {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 500px) {
+    .skills-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

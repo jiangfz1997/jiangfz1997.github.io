@@ -1,0 +1,85 @@
+---
+import Base from '../../layouts/Base.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+
+const projects = (await getCollection('projects'))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const active = projects.filter(p => p.data.status !== 'archived');
+const archived = projects.filter(p => p.data.status === 'archived');
+---
+
+<Base title="Projects — Fengze Jiang" description="Things I've built.">
+  <h1>Projects</h1>
+  <p class="subtitle">Things I've built — with context that doesn't fit on a resume.</p>
+
+  <div class="grid">
+    {active.map(p => (
+      <ProjectCard
+        title={p.data.title}
+        description={p.data.description}
+        tags={p.data.tags}
+        slug={p.slug}
+        github={p.data.github}
+        demo={p.data.demo}
+        status={p.data.status}
+      />
+    ))}
+  </div>
+
+  {archived.length > 0 && (
+    <section class="archived-section">
+      <h2 class="section-label">Archived</h2>
+      <div class="grid">
+        {archived.map(p => (
+          <ProjectCard
+            title={p.data.title}
+            description={p.data.description}
+            tags={p.data.tags}
+            slug={p.slug}
+            github={p.data.github}
+            demo={p.data.demo}
+            status={p.data.status}
+          />
+        ))}
+      </div>
+    </section>
+  )}
+</Base>
+
+<style>
+  h1 {
+    margin-bottom: 0.4rem;
+  }
+
+  .subtitle {
+    color: var(--color-text-muted);
+    margin-bottom: 2rem;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1rem;
+  }
+
+  .archived-section {
+    margin-top: 3rem;
+  }
+
+  .section-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-muted);
+    margin-bottom: 1rem;
+  }
+
+  @media (max-width: 600px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

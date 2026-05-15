@@ -1,0 +1,144 @@
+---
+import Base from './Base.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  date: Date;
+  tags: string[];
+  github?: string;
+  demo?: string;
+  status: 'completed' | 'in-progress' | 'archived';
+}
+
+const { title, description, date, tags, github, demo, status } = Astro.props;
+const formatted = date.toLocaleDateString('en-US', { year: 'numeric', month: 'long' });
+
+const statusLabel: Record<string, string> = {
+  'completed': 'Completed',
+  'in-progress': 'In Progress',
+  'archived': 'Archived',
+};
+---
+
+<Base title={`${title} — Fengze Jiang`} description={description}>
+  <article class="project">
+    <a href="/projects" class="back">← All projects</a>
+
+    <header class="project-header">
+      <div class="title-row">
+        <h1>{title}</h1>
+        <span class:list={['status-badge', status]}>{statusLabel[status]}</span>
+      </div>
+      <p class="project-desc">{description}</p>
+
+      <div class="meta-row">
+        <time datetime={date.toISOString()} class="date">{formatted}</time>
+        <div class="tags">
+          {tags.map(tag => <span class="tag">{tag}</span>)}
+        </div>
+        <div class="project-links">
+          {github && <a href={github} target="_blank" rel="noopener">GitHub ↗</a>}
+          {demo && <a href={demo} target="_blank" rel="noopener">Live demo ↗</a>}
+        </div>
+      </div>
+    </header>
+
+    <hr />
+
+    <div class="project-body">
+      <slot />
+    </div>
+  </article>
+</Base>
+
+<style>
+  .project {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .back {
+    display: inline-block;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    margin-bottom: 1.5rem;
+    text-decoration: none;
+  }
+
+  .back:hover {
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .project-header {
+    margin-bottom: 2rem;
+  }
+
+  .title-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.6rem;
+  }
+
+  .status-badge {
+    font-size: 0.7rem;
+    font-weight: 500;
+    padding: 0.2em 0.6em;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  .status-badge.completed { background: rgba(34, 197, 94, 0.12); color: #4ade80; }
+  .status-badge.in-progress { background: rgba(234, 179, 8, 0.12); color: #facc15; }
+  .status-badge.archived { background: var(--color-bg-secondary); color: var(--color-text-muted); }
+
+  .project-desc {
+    color: var(--color-text-muted);
+    font-size: 1.05rem;
+    margin-bottom: 1rem;
+  }
+
+  .meta-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .date {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+  }
+
+  .tags {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+
+  .project-links {
+    display: flex;
+    gap: 1rem;
+    margin-left: auto;
+  }
+
+  .project-links a {
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+
+  .project-body :global(h2) { margin-top: 2rem; margin-bottom: 0.75rem; }
+  .project-body :global(h3) { margin-top: 1.5rem; margin-bottom: 0.5rem; }
+  .project-body :global(ul), .project-body :global(ol) { padding-left: 1.5rem; margin-bottom: 1rem; }
+  .project-body :global(li) { margin-bottom: 0.3rem; }
+  .project-body :global(img) { max-width: 100%; border-radius: 8px; margin: 1.5rem 0; }
+  .project-body :global(blockquote) {
+    border-left: 3px solid var(--color-accent);
+    padding-left: 1rem;
+    color: var(--color-text-muted);
+    margin: 1.5rem 0;
+  }
+</style>
