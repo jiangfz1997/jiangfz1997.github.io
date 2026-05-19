@@ -1,22 +1,22 @@
 ---
 import Base from '../layouts/Base.astro';
-import PostCard from '../components/PostCard.astro';
+// import PostCard from '../components/PostCard.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import { getCollection } from 'astro:content';
 
-const posts = (await getCollection('blog'))
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, 3);
+// const posts = (await getCollection('blog'))
+//   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+//   .slice(0, 3);
 
 const featuredProjects = (await getCollection('projects'))
   .filter(p => p.data.featured)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
-<Base title="Fengze Jiang">
+<Base title="Fangzhou Jiang">
   <section class="hero">
-    <h1>Fengze Jiang</h1>
-    <p class="hero-tagline">ML Engineer · Builder · Writer</p>
+    <h1>Fangzhou Jiang</h1>
+    <p class="hero-tagline">Software Engineer · Builder · Writer</p>
     <p class="hero-bio">
       I build LLM-powered systems and the evaluation infrastructure around them.
       Currently focused on retrieval, evals, and making language models useful in production.
@@ -47,6 +47,7 @@ const featuredProjects = (await getCollection('projects'))
     </div>
   </section>
 
+  {/* Blog section hidden temporarily
   <section class="section">
     <div class="section-header">
       <h2 class="section-title">Recent Posts</h2>
@@ -64,6 +65,7 @@ const featuredProjects = (await getCollection('projects'))
       ))}
     </div>
   </section>
+  */}
 </Base>
 
 <style>
