@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 // import PostCard from '../components/PostCard.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import { getCollection } from 'astro:content';
+import GameCarousel from '../components/GameCarousel.astro';
 
 // const posts = (await getCollection('blog'))
 //   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
@@ -16,10 +17,10 @@ const featuredProjects = (await getCollection('projects'))
 <Base title="Fangzhou Jiang">
   <section class="hero">
     <h1>Fangzhou Jiang</h1>
-    <p class="hero-tagline">Software Engineer · Builder · Writer</p>
+    <p class="hero-tagline">Code, craft, and a curiosity for AI.</p>
     <p class="hero-bio">
-      I build LLM-powered systems and the evaluation infrastructure around them.
-      Currently focused on retrieval, evals, and making language models useful in production.
+      Backend engineer with experience in performance analysis, optimization, and test automation.
+      Passionate about backend systems and applying AI to build things that actually work.
     </p>
     <div class="hero-links">
       <a href="/about" class="btn">About me</a>
@@ -29,7 +30,36 @@ const featuredProjects = (await getCollection('projects'))
 
   <section class="section">
     <div class="section-header">
-      <h2 class="section-title">Featured Projects</h2>
+      <h2 class="section-title">Experience</h2>
+    </div>
+    <div class="experience-list">
+      <div class="experience-item">
+        <div class="experience-header">
+          <div>
+            <span class="experience-company">Netease Games</span>
+            <span class="experience-role">Software Engineer in Test</span>
+          </div>
+          <span class="experience-period">2021 – 2024 · Shanghai, China</span>
+        </div>
+        <p class="experience-desc">
+          <strong>Test</strong> — Owned end-to-end backend performance evaluation on large-scale cloud game servers:
+          load testing, disaster recovery, API testing, and test framework maintenance.
+        </p>
+        <p class="experience-desc">
+          <strong>Dev</strong> — Built internal tooling including automated workflows, data monitoring and collection
+          pipelines, CI/CD infrastructure, and a workforce efficiency and workflow platform.
+        </p>
+        <p class="experience-desc">
+          <strong>Beyond the code</strong> — Worked across time zones with global studios and took ownership of intern onboarding and mentorship.
+        </p>
+        <GameCarousel />
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <h2 class="section-title">Featured Personal Projects</h2>
       <a href="/projects" class="section-more">All projects →</a>
     </div>
     <div class="project-grid">
@@ -157,6 +187,67 @@ const featuredProjects = (await getCollection('projects'))
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
     gap: 1rem;
+  }
+
+  .experience-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+  }
+
+  .experience-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .experience-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+
+  .experience-company {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--color-text);
+    margin-right: 0.6rem;
+  }
+
+  .experience-role {
+    font-size: 0.875rem;
+    color: var(--color-accent);
+  }
+
+  .experience-period {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    white-space: nowrap;
+  }
+
+  .experience-desc {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  .experience-games {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    margin-top: 0.25rem;
+  }
+
+  .game-tag {
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.2em 0.65em;
+    border-radius: 999px;
+    background: rgba(109, 133, 245, 0.12);
+    color: var(--color-accent);
   }
 
   .post-list {
